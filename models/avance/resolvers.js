@@ -20,9 +20,7 @@ const resolversAvance = {
     avanceLider: async (parents, args, context) => {
       const avancesTotales = []
       if (context.userData.rol === 'LIDER') {
-        const avances = await ModeloAvance.find({
-          creadoPor: context.userData._id,
-        }).populate('proyecto').populate('creadoPor');
+        const avances = await ModeloAvance.find().populate('proyecto').populate('creadoPor');
         avances.forEach(avance => {
           if (avance.proyecto.lider.valueOf() === context.userData._id) {
             avancesTotales.push(avance);
